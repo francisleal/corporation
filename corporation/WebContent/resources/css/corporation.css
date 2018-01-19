@@ -1,0 +1,15 @@
+p.corporation {
+    color: #fff;
+    font-size: 1.5em;
+    margin: 0;
+    padding-right: 30px;
+    margin-bottom: 5px;
+}
+
+img.corporation {
+    width: 118px;
+    height: 140px;
+    border: 1px solid;
+    display: block;
+    margin-bottom: 5px;
+}
