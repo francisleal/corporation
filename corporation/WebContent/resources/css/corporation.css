@@ -9,7 +9,11 @@ p.corporation {
 img.corporation {
     width: 118px;
     height: 140px;
-    border: 1px solid;
+    border: 1px solid #ced4da;
     display: block;
     margin-bottom: 5px;
+}
+
+checkbox.corporation {
+	margin-top: 15px;
 }
