@@ -1,6 +1,7 @@
-<html ng-app="loja">
+<!DOCTYPE html> 
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8"> 
 </head>
 
 <div class="row row-offcanvas row-offcanvas-right">
@@ -11,154 +12,74 @@
 	</div>
 	
 	<div class="col-12 col-md-9" ng-init="carregarEstados();">
-		<div class="">
-			<div class="content">
-				<form id="formCliente" ng-submit="salvarCliente();">
-					<div class="row">
+		<div class="content">
+			<form id="formCliente" ng-submit="salvarCliente();">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Id 
+								<input type="text" ng-model="cliente.id" class="form-control border-input" disabled />
+							</label>	
+						</div>
+					</div>
+				</div>
 
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<img class="corporation" alt="Foto" id="imagemCliente" src="" >  -->
-<!--                                 <input type="file" id="file" onchange="javascript:visualizarImg();"> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Nome 
+								<input type="text" ng-model="cliente.nome" class="form-control border-input" placeholder="Nome" required="required">
+							</label>	
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Endereço 
+								<input type="text" ng-model="cliente.endereco" class="form-control border-input"  placeholder="Endereço" required="required">
+							</label>	
+						</div>
+					</div>
+				</div>
 
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Id</label> <input type="text" ng-model="cliente.id"
-									class="form-control border-input" disabled />
-							</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for"telefone">Telefone 
+								<input type="text" id="telefone" ng-model="cliente.telefone" class="form-control border-input" placeholder="Telefone" required="required">
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Estado
+								<select class="form-control" id="selectEstados" ng-model="cliente.estados.id">
+									<option value="">Selecione</option>
+									<option ng-repeat="est in dataEstados" ng-click="carregarCidades(est)" value="{{est.id}}">{{est.sigla}}</option>
+								</select>
+							</label>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Nome</label> <input type="text" ng-model="cliente.nome"
-									class="form-control border-input" placeholder="Nome"
-									required="required">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="endereco">Endereço</label> <input type="text"
-									required="required" class="form-control border-input"
-									ng-model="cliente.endereco" placeholder="Endereço">
-							</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Cidades
+								<select class="form-control" id="selectCidades" ng-model="cliente.cidades.id">
+									<option value="">Selecione</option>
+									<option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
+								</select>
+							</label>
 						</div>
 					</div>
+				</div>
 
-					<div class="row">
-						<div class="col-md-5">
-							<div class="form-group">
-								<label>Telefone</label> <input type="text" id="telefone"
-									ng-model="cliente.telefone" class="form-control border-input"
-									placeholder="Telefone" required="required">
-
-							</div>
-						</div>
-
-
-<!-- 						<div class="col-md-5"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Sexo</label> <select ng-model="cliente.sexo" -->
-<!-- 									class="form-control"> -->
-<!-- 									<option value="Masculino">Masculino</option> -->
-<!-- 									<option value="Feminino">Feminino</option> -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-
-<!-- 						<div class="col-md-1"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Ativo <input type="checkbox" class="form-control corporation" -->
-<!-- 									ng-model="cliente.ativo"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-					</div>
-
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Banco de Dados  -->
-<!-- 									<input type="radio" class="form-control" name="interesse" -->
-<!-- 									ng-model="cliente.interesse" value="banco"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Programação <input type="radio" class="form-control" name="interesse" -->
-<!-- 									ng-model="cliente.interesse" value="programacao" -->
-<!-- 									ng-checked="true"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Análise <input type="radio" class="form-control" name="interesse" ng-model="cliente.interesse" value="analise"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Cpf <input type="text" class="form-control" id="cpf" name="cpf" ng-model="cliente.cpf"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Estado</label> <select ng-model="cliente.estados.id" -->
-<!-- 									id="selectEstados" class="form-control" -->
-<!-- 									onchange="javascript:carregarCidadesChrome(this);"> -->
-<!-- 									<option value="">Selecione</option> -->
-<!-- 									<option ng-repeat="est in dataEstados" -->
-<!-- 										ng-click="carregarCidades(est)" value="{{est.id}}">{{est.sigla}} -->
-<!-- 									</option> -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-<!-- 						<div class="col-md-5"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Cidades</label> <select id="selectCidades" -->
-<!-- 									ng-model="cliente.cidades.id" class="form-control"> -->
-<!-- 									<option value="">Selecione</option> -->
-<!-- 									<option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option> -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-<!-- 					</div> -->
-
-					<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
-					<button type="submit" class="btn btn-info btn-fill btn-wd" ng-click="$scope.cliente={}">Limpar</button>
-				</form>
-			</div>
+				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+				<button type="submit" class="btn btn-info btn-fill btn-wd" ng-click="$scope.cliente={}">Limpar</button>
+			</form>
 		</div>
 	</div>
-
 </div>
 
-
-
-
-<script type="text/javascript">
-	$('#telefone').mask('(99) 9999-9999');
-	$('#cpf').mask('999.999.999-99');
-</script>
 </html>

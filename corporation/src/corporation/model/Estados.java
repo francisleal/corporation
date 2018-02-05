@@ -12,9 +12,10 @@ public class Estados {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String none;
+	private String nome;
 	
 	private String sigla;
+	
 
 	public Long getId() {
 		return id;
@@ -24,12 +25,12 @@ public class Estados {
 		this.id = id;
 	}
 
-	public String getNone() {
-		return none;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNone(String none) {
-		this.none = none;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getSigla() {

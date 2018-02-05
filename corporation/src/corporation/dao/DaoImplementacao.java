@@ -36,11 +36,13 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 	@Override
 	public void atualizar(T objeto) throws Exception {
 		sessionFactory.getCurrentSession().update(objeto);	
+		sessionFactory.getCurrentSession().flush();
 	}
 	
 	@Override
 	public void salvarOuAtualizar(T objeto) throws Exception {
 		sessionFactory.getCurrentSession().saveOrUpdate(objeto);
+		sessionFactory.getCurrentSession().flush();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -55,7 +57,19 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> lista() throws Exception {
-		return sessionFactory.getCurrentSession().createCriteria(persistenceClass).list();
-		
+		return sessionFactory.getCurrentSession().createCriteria(persistenceClass).list();		
+	}
+	
+	@Override
+	public T loadObjeto(Long codigo) throws Exception {
+		return (T) sessionFactory.getCurrentSession().get(persistenceClass, codigo);
+	}
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	
+	public Class<T> getPersistenceClass() {
+		return persistenceClass;
 	}
 }

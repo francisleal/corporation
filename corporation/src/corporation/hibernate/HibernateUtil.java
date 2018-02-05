@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 
 /**
  * Responsavel por estabelecer a conexão do hibernate
- * @author francis.leal
+ * @author alex
  */
 public class HibernateUtil implements Serializable {
 
@@ -23,7 +23,8 @@ public class HibernateUtil implements Serializable {
 	private static SessionFactory buildSessionFactory() {
 		try {
 			if (sessionFactory == null) {
-				sessionFactory = (new Configuration()).configure().buildSessionFactory();
+				sessionFactory = (new Configuration()).configure()
+						.buildSessionFactory();
 			}
 			return sessionFactory;
 

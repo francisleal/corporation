@@ -19,6 +19,8 @@
 				<th>Nome</th>
 				<th>Endereço</th>
 				<th>Telefone</th>
+				<th>Estado</th>
+				<th>Cidade</th>
 				<th>Remover</th>
 				<th>Editar</th>
 			</thead>
@@ -29,6 +31,8 @@
 					<td>{{cliente.nome}}</td>
 					<td>{{cliente.endereco}}</td>
 					<td>{{cliente.telefone}}</td>
+					<td>{{cliente.estados.nome}}</td>
+					<td>{{cliente.cidades.nome}}</td>
 					<td>
 						<a href ng-click="removerCliente(cliente.id);">Apagar
 							<i class="fa fa-times" aria-hidden="true" style="color: red;"></i>

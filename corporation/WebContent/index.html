@@ -3,7 +3,6 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -11,24 +10,28 @@
 
 	<title>Corporation</title>
 
-	<!-- Bootstrap core CSS -->
+	<!-- Bootstrap core CSS --><!-- Custom styles for this template -->
+    <link href="resources/css/corporation.css" rel="stylesheet" />	
 	<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
-	<!-- Custom styles for this template -->
-	<link href="resources/css/offcanvas.css" rel="stylesheet">
+	<link href="resources/css/animate.min.css" rel="stylesheet" />
+	<link href="resources/css/offcanvas.css" rel="stylesheet" />
+	<link href="resources/fontawesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+	
+	<script src="resources/js/jquery-3.2.1.slim.min.js"></script>
+	<script src="resources/js/bootstrap-notify.js"></script>
 
-	<script type="text/javascript" src="resources/js/angular.min.js"></script>
-	<script type="text/javascript" src="resources/js/angular-route.js"></script>
-	<script type="text/javascript" src="resources/js/angular-resource.js"></script>
-	<script type="text/javascript" src="resources/js/angular-animate.js"></script>
-	<script type="text/javascript" src="resources/js/angular-locale_pt-br.js"></script>
-
-	<script type="text/javascript" src="resources/js/app.js"></script>
-
+	<script src="resources/js/angular.min.js"></script>
+	<script src="resources/js/angular-route.js"></script>
+	<script src="resources/js/angular-resource.js"></script>
+	<script src="resources/js/angular-animate.js"></script>
+	<script src="resources/js/angular-locale_pt-br.js"></script>
+	
+	<script src="resources/js/app.js"></script>
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Corporation</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
 		 aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -36,37 +39,33 @@
 
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home
-						<span class="sr-only">(current)</span>
-					</a>
+				<li class="nav-item">
+					<a class="nav-link" href="#clientelist">Cliente</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
+					<a class="nav-link" href="#cliente/cadastro">Cadastrar</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link disabled" href="#">Disabled</a>
-				</li>
+				<!--Menu dropdown-->
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+					<a href class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 					 aria-expanded="false">Dropdown</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action
-						</a>
+						<a class="dropdown-item" href="#clientelist">Cliente</a>
+						<a class="dropdown-item" href="#cliente/cadastro">Cadastrar</a>
 						<a class="dropdown-item" href="#">Something else here</a>
 					</div>
 				</li>
+				<!--/Menu dropdown-->
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				<input class="form-control mr-sm-2" type="text" placeholder="Filtro" aria-label="Search" ng-model="filtro">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
 		</div>
 	</nav>
 
 	<main role="main" class="container">
-		<!--row-->
+	
 		<div class="row row-offcanvas row-offcanvas-right">
 
 			<div class="col-12 col-md-9">
@@ -78,25 +77,27 @@
 					<p>Our Business is life itself</p>
 				</div>
 				<!--ng-view-->
-				<div class="content" ng-view></div>
+				<div class="content" ng-view>
+				
+				</div>
 				<!--/ng-view-->
 			</div>
 
-			<!--/span-->
+			<!--Menu lateral Direito-->
 			<div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
 				<div class="list-group">
 					<a href="#" class="list-group-item active">Home</a>
-					<a href="#clientelist" class="list-group-item">Client</a>
-					<a href="#" class="list-group-item">Link</a>
+					<a href="#clientelist" class="list-group-item"><i class="fa fa-user " aria-hidden="true" style="color: #007bff;"></i> Cliente</a>
+					<a href="#cliente/cadastro" class="list-group-item"><i class="fa fa-file-o" aria-hidden="true"></i> Cadastrar</a>
 					<a href="#" class="list-group-item">Link</a>
 					<a href="#" class="list-group-item">Link</a>
 					<a href="#" class="list-group-item">Link</a>
 					<a href="#" class="list-group-item">Link</a>
 				</div>
 			</div>
-			<!--/span-->
+			<!--/Menu lateral Direito-->
+			
 		</div>
-		<!--/row-->
 
 		<hr>
 
@@ -104,19 +105,27 @@
 	<!--/.container-->
 
 	<footer>
-		<p>© Company 2017</p>
+		<p>© Company 2018</p>
 	</footer>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="resources/js/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script>
-		window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
+	<!-- Colocado no final do documento para que as páginas sejam carregadas mais rapidamente -->	
+	<script>window.jQuery || document.write('<script src="resources/js/vendor/jquery-slim.min.js"><\/script>')</script>
 	<script src="resources/js/popper.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/offcanvas.js"></script>
 </body>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.notify({
+			message: "Bem Vindo!"
+		},{
+			type: 'success',
+			timer: 500
+		});
+	});
+</script>
 
 </html>

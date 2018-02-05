@@ -22,7 +22,7 @@ import corporation.listener.ContextLoaderListenerCaixakiUtils;
 
 /**
  * Intercepta todas as requisições, faz commit e rollback 
- * @author francis.leal
+ * @author alex
  */
 @WebFilter(filterName = "conexaoFilter")
 public class FilterOpenSessionInView extends DelegatingFilterProxy implements
@@ -37,11 +37,15 @@ public class FilterOpenSessionInView extends DelegatingFilterProxy implements
 	}
 
 	@Override
-	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest servletRequest,
+			ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
 
-		BasicDataSource springDataSource = (BasicDataSource) ContextLoaderListenerCaixakiUtils.getBean("springDataSource");
+		BasicDataSource springDataSource = (BasicDataSource) ContextLoaderListenerCaixakiUtils
+				.getBean("springDataSource");
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-		PlatformTransactionManager transactionManager = new DataSourceTransactionManager(springDataSource);
+		PlatformTransactionManager transactionManager = new DataSourceTransactionManager(
+				springDataSource);
 		TransactionStatus status = transactionManager.getTransaction(def);
 
 		try {

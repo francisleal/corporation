@@ -10,7 +10,7 @@ CREATE TABLE cidades (
   nome varchar(100) NOT NULL,
   estados_id bigint NOT NULL,
   PRIMARY KEY (id)
-) ; */
+);*/
 
 
 /*Insert estados*/

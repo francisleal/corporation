@@ -50,21 +50,14 @@
      <bean id="clienteController" name="clienteController" class="corporation.controller.ClienteController">
      	<constructor-arg value="corporation.model.Cliente"></constructor-arg>
      </bean>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+     
+     <bean id="estadosController" name="estadosController" class="corporation.controller.EstadosController">
+     	<constructor-arg value="corporation.model.Estados"></constructor-arg>
+     </bean>
+     
+     <bean id="cidadesController" name="cidadesController" class="corporation.controller.CidadesController">
+     	<constructor-arg value="corporation.model.Cidades"></constructor-arg>
+     </bean>
       
 </beans>
 

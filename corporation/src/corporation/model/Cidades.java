@@ -1,21 +1,28 @@
 package corporation.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ * Modelo que representa a tabel de cidades do banco * 
+ * @author Francis
+ * 
+ */
 @Entity
 public class Cidades {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String nome;
-	
-	@ManyToOne
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private Estados estados;
 
 	public Long getId() {
@@ -66,6 +73,5 @@ public class Cidades {
 			return false;
 		return true;
 	}
-	
-	
+
 }

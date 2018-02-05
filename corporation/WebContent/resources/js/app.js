@@ -29,7 +29,21 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 	
  	if($routeParams.id != null && $routeParams.id != undefined && $routeParams.id != '') {
 		$http.get("cliente/buscarcliente/" + $routeParams.id).success(function(response){
-			$scope.cliente = response;
+			$scope.cliente = response;			
+			//------------------ carrega estados e cidades do cliente em edi��o
+			setTimeout(function () {
+				$("#selectEstados").prop('selectedIndex', (new Number($scope.cliente.estados.id) + 1));
+				
+				$http.get("cidades/listar/" + $scope.cliente.estados.id).success(function(response) {
+					$scope.cidades = response;
+					setTimeout(function () {
+						$("#selectCidades").prop('selectedIndex', buscarKeyJson(response, 'id', $scope.cliente.cidades.id));
+					}, 500);					
+				}).error(function(data, status, headers, config) {
+					erro("Error: " + status);
+				});			
+			}, 1000);
+			//----------------------			
 		}).error(function(data, status, headers, config){
 			erro("Error buscarcliente : " + status);
 		});
@@ -52,7 +66,7 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 
 	$scope.listarClientes = function() {
 		$http.get("cliente/listar").success(function(response) {
-			$scope.data = response;
+			response == null ? $scope.data = response : $scope.data = response;
 		}).error(function(response){
 			erro("Erro listar :" + response);
 		});
@@ -67,23 +81,41 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 		});
 	}; 
 
+	$scope.carregarEstados = function() {
+		$scope.dataEstados = [{}];
+		$http.get("estados/listar").success(function(response) {
+			$scope.dataEstados = response;
+		}).error(function(response){
+			erro("Erro listar :" + response);
+		});
+	};
 	
+	$scope.carregarCidades = function(estado) {
+		$http.get("cidades/listar/" + estado.id).success(function(response) {
+			$scope.cidades = response;
+			console.log(response);
+		}).error(function(response){
+			erro("Erro listar :" + response);
+		});
+	};
 	
 
- 	$scope.data = [ 
-		{id: 1, nome : 'Fulano', endereco : 'Samamabaia', telefone : '(61)9999-5566', foto : null},
-		{id: 2, nome : 'Beltrano', endereco : 'rec das emas', telefone : '(61)9988-5446', foto : null},
-		{id: 3, nome : 'Ciclano', endereco : 'rec das emas', telefone : '(61)9988-5446', foto : null}
+	$scope.data = [ 
+		{id: 1, nome : 'Fulano', endereco : 'Marte', telefone : '(61)9999-5566', estados : { nome : 'Acre' }, cidades : { nome : 'Capixaba' }, foto : null},
+		{id: 2, nome : 'Beltrano', endereco : 'Jupter', telefone : '(61)9988-5446', estados : { nome : 'Bahia'}, cidades : { nome : 'Abare' } , foto : null},
+		{id: 3, nome : 'Ciclano', endereco : 'Venus', telefone : '(61)9988-5446', estados : { nome : 'Tocantins'}, cidades : { nome : 'Araguatins' } , foto : null},
+		{id: 3, nome : 'Armano', endereco : 'Nova Terra', telefone : '(61)3333-2255', estados : { nome : 'Distrito Federal'}, cidades : { nome : 'Cruzeiro' } , foto : null}
 	];
 	
-	/*$scope.salvarCliente = function(cliente){
-		$scope.data.push(angular.copy(cliente));	
-		console.log($scope.data);
-	}
-	
+	/*
 	$scope.removerCliente = function(cliente) {
 		$scope.data.splice(cliente, 1);
 	};
+	
+	$scope.salvarCliente = function(cliente){
+		$scope.data.push(angular.copy(cliente));	
+		console.log($scope.data);
+	}
 	
 	$scope.editarCliente = function(id) {
 		$location.path('clienteedit/' + id);
@@ -108,6 +140,15 @@ function sucesso(texto) {
 		type: 'success',
 		timer: 250
 	});
+}
+
+function buscarKeyJson(obj, key, value) {
+	for (var i = 0; i < obj.length; i++) {
+		if (obj[i][key] == value) {
+			return i + 2;
+		}
+	}
+	return null;
 }
 
 
