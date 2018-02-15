@@ -5,17 +5,17 @@
 </head>
 
 <div class="row row-offcanvas row-offcanvas-right">
-	<div class="col-12 col-md-9">
+	<div class="col-12 col-md-12">
 		<h1>Cadastro de clientes</h1>
 		<a href="#clientelist">Lista de clientes <i class="fa fa-user " aria-hidden="true" style="color: #007bff;"></i></a> 
 		<br /> 
 	</div>
 	
-	<div class="col-12 col-md-9" ng-init="carregarEstados();">
+	<div class="col-12 col-md-12" ng-init="carregarEstados();">
 		<div class="content">
 			<form id="formCliente" ng-submit="salvarCliente();">
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group">
 							<label>Id 
 								<input type="text" ng-model="cliente.id" class="form-control border-input" disabled />
@@ -49,13 +49,52 @@
 							</label>
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for"telefone">Sexo 
+								<select class="form-control custom-select d-block w-100">
+									<option>Selecione</option>
+									<option>Masculino</option>
+									<option>Feminino</option>
+								</select>
+							</label>
+						</div>
+					</div>
+					
+					<div class="col-md-2">
+						<div class="form-group">
+							<label  class="text-center">Ativo 
+								<input type="checkbox" ng-model="cliente.ativo" class="form-control" style="margin-top:10px">
+							</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<label class="text-center">Análise
+							<input type="radio" name="radioButton" value="Análise" class="form-control" checked="true">
+						</label>
+					</div>
+					
+					<div class="col-md-4">
+						<label class="text-center">Programação
+							<input type="radio" name="radioButton" value="Programação" class="form-control" >
+						</label>
+					</div>
+					
+					<div class="col-md-4">
+						<label class="text-center">Banco de Dados
+							<input type="radio" name="radioButton" value="Banco de Dados" class="form-control" >
+						</label>
+					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group">
 							<label>Estado
-								<select class="form-control" id="selectEstados" ng-model="cliente.estados.id">
+								<select class="form-control custom-select d-block w-100" id="selectEstados" ng-model="cliente.estados.id">
 									<option value="">Selecione</option>
 									<option ng-repeat="est in dataEstados" ng-click="carregarCidades(est)" value="{{est.id}}">{{est.sigla}}</option>
 								</select>
@@ -63,10 +102,10 @@
 						</div>
 					</div>
 
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="form-group">
 							<label>Cidades
-								<select class="form-control" id="selectCidades" ng-model="cliente.cidades.id">
+								<select class="form-control custom-select d-block w-100" id="selectCidades" ng-model="cliente.cidades.id">
 									<option value="">Selecione</option>
 									<option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
 								</select>
