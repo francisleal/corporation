@@ -4,20 +4,29 @@ var app = angular.module('loja', [ 'ngRoute', 'ngResource', 'ngAnimate' ]);
 // configurando rotas
 app.config(function($routeProvider) {
 
+	// listar
 	$routeProvider.when("/clientelist", {
 		controller : "clienteController",
 		templateUrl : "cliente/list.html"
-	})// listar
+	})
+	
+	// visualizar
+	.when("/clientevisualizar/:id", {
+		controller : "clienteController",
+		templateUrl : "cliente/visualizar.html"
+	})
 
+	// editar
 	.when("/clienteedit/:id", {
 		controller : "clienteController",
 		templateUrl : "cliente/cadastro.html"
-	})// editar
+	})
 
+	// novo
 	.when("/cliente/cadastro", {
 		controller : "clienteController",
 		templateUrl : "cliente/cadastro.html"
-	})// novo
+	})
 
 	.otherwise({
 		redirectTo : "/"
@@ -51,19 +60,28 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 		$scope.cliente = {};
 	}
 	
+ 	//editar cliente
 	$scope.editarCliente = function(id) {
 		$location.path('clienteedit/' + id);
 	}
 	
+	// visualizar cliente
+	$scope.visualizarCliente = function(id) {
+		$location.path('clientevisualizar/' + id);
+	}
+	
+	//salvar cliente
 	$scope.salvarCliente = function() {		
 		$http.post("cliente/salvar", $scope.cliente).success(function(){
 			$scope.cliente = {};
+			$location.path('clientelist/');
 			sucesso("Salvo com sucesso");
 		}).error(function(data, status, headers, config){
 			erro("Error salvar : " + status);
 		});
 	};
 
+	//listar clientes
 	$scope.listarClientes = function() {
 		$http.get("cliente/listar").success(function(response) {
 			response == null ? $scope.data = response : $scope.data = response;
@@ -72,6 +90,7 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 		});
 	};
 	
+	//remover cliente
 	$scope.removerCliente = function(codCliente) {
 		$http.delete("cliente/deletar/" + codCliente).success(function(response){
 			$scope.listarClientes();
@@ -81,6 +100,7 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 		});
 	}; 
 
+	//carregar estados
 	$scope.carregarEstados = function() {
 		$scope.dataEstados = [{}];
 		$http.get("estados/listar").success(function(response) {
@@ -90,6 +110,7 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 		});
 	};
 	
+	//carregar cidades
 	$scope.carregarCidades = function(estado) {
 		$http.get("cidades/listar/" + estado.id).success(function(response) {
 			$scope.cidades = response;
@@ -100,12 +121,12 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 	};
 	
 
-	$scope.data = [ 
-		{id: 1, nome : 'Fulano', endereco : 'Marte', telefone : '(61)9999-5566', estados : { nome : 'Acre' }, cidades : { nome : 'Capixaba' }, foto : null},
-		{id: 2, nome : 'Beltrano', endereco : 'Jupter', telefone : '(61)9988-5446', estados : { nome : 'Bahia'}, cidades : { nome : 'Abare' } , foto : null},
-		{id: 3, nome : 'Ciclano', endereco : 'Venus', telefone : '(61)9988-5446', estados : { nome : 'Tocantins'}, cidades : { nome : 'Araguatins' } , foto : null},
-		{id: 3, nome : 'Armano', endereco : 'Nova Terra', telefone : '(61)3333-2255', estados : { nome : 'Distrito Federal'}, cidades : { nome : 'Cruzeiro' } , foto : null}
-	];
+//	$scope.data = [ 
+//		{id: 1, nome : 'Fulano', endereco : 'Marte', telefone : '(61)9999-5566', estados : { nome : 'Acre' }, cidades : { nome : 'Capixaba' }, foto : null},
+//		{id: 2, nome : 'Beltrano', endereco : 'Jupter', telefone : '(61)9988-5446', estados : { nome : 'Bahia'}, cidades : { nome : 'Abare' } , foto : null},
+//		{id: 3, nome : 'Ciclano', endereco : 'Venus', telefone : '(61)9988-5446', estados : { nome : 'Tocantins'}, cidades : { nome : 'Araguatins' } , foto : null},
+//		{id: 3, nome : 'Armano', endereco : 'Nova Terra', telefone : '(61)3333-2255', estados : { nome : 'Distrito Federal'}, cidades : { nome : 'Cruzeiro' } , foto : null}
+//	];
 	
 	/*
 	$scope.removerCliente = function(cliente) {

@@ -1,8 +1,5 @@
 package corporation.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,6 +23,7 @@ public class ClienteController extends DaoImplementacao<Cliente> implements DaoI
 		super(persistenceClass);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="salvar", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity salvar(@RequestBody String jsonCliente) throws Exception {
@@ -37,25 +35,23 @@ public class ClienteController extends DaoImplementacao<Cliente> implements DaoI
 	
 	@RequestMapping(value="listar", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public String listar() throws Exception {		
-		return new Gson().toJson(super.lista());
+	public byte[] listar() throws Exception {		
+		return new Gson().toJson(super.lista()).getBytes("UTF-8");
 	}
 	
 	@RequestMapping(value="deletar/{codCliente}", method=RequestMethod.DELETE)
-	public @ResponseBody String deletar(@PathVariable("codCliente") String codCliente) throws Exception {
-		Cliente objeto = new Cliente();		
-		objeto.setId(Long.parseLong(codCliente));
-		super.deletar(objeto);
+	public  @ResponseBody String deletar (@PathVariable("codCliente") String codCliente) throws Exception {
+		super.deletar(loadObjeto(Long.parseLong(codCliente)));
 		return "";
 	}
 	
 	@RequestMapping(value="buscarcliente/{codCliente}", method=RequestMethod.GET)
-	public @ResponseBody String buscarCliente(@PathVariable("codCliente") String codCliente) throws Exception {
+	public @ResponseBody byte[] buscarCliente(@PathVariable("codCliente") String codCliente) throws Exception {
 		Cliente objeto = super.loadObjeto(Long.parseLong(codCliente));
 		if (objeto  == null) {
-			return "{}";
+			return "{}".getBytes("UTF-8");
 		}
-		return new Gson().toJson(objeto);
+		return new Gson().toJson(objeto).getBytes("UTF-8");
 	}
 
 }

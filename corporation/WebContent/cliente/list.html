@@ -1,60 +1,56 @@
-<html ng-app="loja">
+<!DOCTYPE html>
+<html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
 <h1>Lista de clientes</h1>
 
-<a class="btn btn-secondary" href="#cliente/cadastro" role="button">Novo »</a>
+<a href="#cliente/cadastro">Cadastrar <i class="fa fa-file-o" aria-hidden="true"></i></a>
 
-<br /> 
-<br /> 
+<br />
+<br />
 
 <div ng-controller="clienteController" ng-init="listarClientes()">
 
-	<div class="content table-responsive table-full-width">
-		<table class="table table-hover">
-			<thead>
-				<th>ID</th>
-				<th>Nome</th>
-				<th>Endereço</th>
-				<th>Telefone</th>
-				<th>Estado</th>
-				<th>Cidade</th>
-				<th>Remover</th>
-				<th>Editar</th>
-			</thead>
-			
-			<tbody>
-				<tr ng-repeat="cliente in data | filter:filtro"> 
-					<td>{{cliente.id}}</td>
-					<td>{{cliente.nome}}</td>
-					<td>{{cliente.endereco}}</td>
-					<td>{{cliente.telefone}}</td>
-					<td>{{cliente.estados.nome}}</td>
-					<td>{{cliente.cidades.nome}}</td>
-					<td>
-						<a href ng-click="removerCliente(cliente.id);">Apagar
-							<i class="fa fa-times" aria-hidden="true" style="color: red;"></i>
-						</a>
-					</td>
-					<td>
-						<a href ng-click="editarCliente(cliente.id);">Editar
-							<i class="fa fa-pencil-square-o" aria-hidden="true" style="color: #e7971b;"></i>
-						</a>
-					</td>
-				</tr>
-			</tbody>
-			
-		</table>
-		<div class="" ng-hide="ocultarNavegacao">
-		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Anterior</button>
-		   <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="proximo();">Próximo</button>
-		</div>   
-	</div>
+    <table class="table table-hover corporation">
+        <thead>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Telefone</th>
+            <th>Estado</th>
+            <th>Remover</th>
+            <th>Editar</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cliente in data | filter:filtro">
+                <td>{{cliente.id}}</td>
+                <td><a href ng-click="visualizarCliente(cliente.id)" title="Visualizar Clientes">{{cliente.nome}}</a></td>
+                <td>{{cliente.sobrenome}}</td>
+                <td>{{cliente.telefone}}</td>
+                <td>{{cliente.estados.nome}}</td>
+                <td>
+                    <a href ng-click="removerCliente(cliente.id);">Apagar
+						<i class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+					</a>
+                </td>
+                <td>
+                    <a href ng-click="editarCliente(cliente.id);">Editar
+						<i class="fa fa-pencil-square-o" aria-hidden="true" style="color: #e7971b;"></i>
+					</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
+    <div class="" ng-hide="ocultarNavegacao">
+        <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Anterior</button>
+        <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="proximo();">Próximo</button>
+    </div>
+
+	<br/>
 </div>
-
-
 
 </html>

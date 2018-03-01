@@ -1,124 +1,136 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8"> 
+    <meta charset="UTF-8">
 </head>
 
-<div class="row row-offcanvas row-offcanvas-right">
-	<div class="col-12 col-md-12">
-		<h1>Cadastro de clientes</h1>
-		<a href="#clientelist">Lista de clientes <i class="fa fa-user " aria-hidden="true" style="color: #007bff;"></i></a> 
-		<br /> 
-	</div>
-	
-	<div class="col-12 col-md-12" ng-init="carregarEstados();">
-		<div class="content">
-			<form id="formCliente" ng-submit="salvarCliente();">
-				<div class="row">
-					<div class="col-md-2">
-						<div class="form-group">
-							<label>Id 
-								<input type="text" ng-model="cliente.id" class="form-control border-input" disabled />
-							</label>	
-						</div>
-					</div>
-				</div>
+<h1>Cadastro de clientes</h1>
 
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Nome 
-								<input type="text" ng-model="cliente.nome" class="form-control border-input" placeholder="Nome" required="required">
-							</label>	
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Endereço 
-								<input type="text" ng-model="cliente.endereco" class="form-control border-input"  placeholder="Endereço" required="required">
-							</label>	
-						</div>
-					</div>
-				</div>
+<a href="#clientelist">Lista de clientes <i class="fa fa-user " aria-hidden="true" style="color: #007bff;"></i></a>
 
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for"telefone">Telefone 
-								<input type="text" id="telefone" ng-model="cliente.telefone" class="form-control border-input" placeholder="Telefone" required="required">
-							</label>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for"telefone">Sexo 
-								<select class="form-control custom-select d-block w-100">
-									<option>Selecione</option>
-									<option>Masculino</option>
-									<option>Feminino</option>
-								</select>
-							</label>
-						</div>
-					</div>
-					
-					<div class="col-md-2">
-						<div class="form-group">
-							<label  class="text-center">Ativo 
-								<input type="checkbox" ng-model="cliente.ativo" class="form-control" style="margin-top:10px">
-							</label>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-4">
-						<label class="text-center">Análise
-							<input type="radio" name="radioButton" value="Análise" class="form-control" checked="true">
-						</label>
-					</div>
-					
-					<div class="col-md-4">
-						<label class="text-center">Programação
-							<input type="radio" name="radioButton" value="Programação" class="form-control" >
-						</label>
-					</div>
-					
-					<div class="col-md-4">
-						<label class="text-center">Banco de Dados
-							<input type="radio" name="radioButton" value="Banco de Dados" class="form-control" >
-						</label>
-					</div>
-				</div>
+<br />
+<hr />
 
-				<div class="row">
-					<div class="col-md-2">
-						<div class="form-group">
-							<label>Estado
-								<select class="form-control custom-select d-block w-100" id="selectEstados" ng-model="cliente.estados.id">
-									<option value="">Selecione</option>
-									<option ng-repeat="est in dataEstados" ng-click="carregarCidades(est)" value="{{est.id}}">{{est.sigla}}</option>
-								</select>
-							</label>
-						</div>
-					</div>
+<div class="col-12 col-md-12" ng-init="carregarEstados();">
+    <div class="content">
+        <form id="formCliente" name="formCliente" ng-submit="salvarCliente();">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Nome
+                            <input type="text" ng-model="cliente.nome" class="form-control border-input" placeholder="Nome" required="required">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Sobrenome
+                            <input type="text" ng-model="cliente.sobrenome" class="form-control border-input" placeholder="Sobrenome" required="required">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for "telefone">Telefone
+                            <input type="text" id="telefone" ng-model="cliente.telefone" class="form-control border-input" placeholder="Telefone" required="required">
+                        </label>
+                    </div>
 
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>Cidades
-								<select class="form-control custom-select d-block w-100" id="selectCidades" ng-model="cliente.cidades.id">
-									<option value="">Selecione</option>
-									<option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
-								</select>
-							</label>
-						</div>
-					</div>
-				</div>
+                </div>
+            </div>
 
-				<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
-				<button type="submit" class="btn btn-info btn-fill btn-wd" ng-click="$scope.cliente={}">Limpar</button>
-			</form>
-		</div>
-	</div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Estado
+                            <select class="form-control custom-select d-block w-100" id="selectEstados" ng-model="cliente.estados.id" required="required">
+                                <option value="">Selecione</option>
+                                <option ng-repeat="est in dataEstados" ng-click="carregarCidades(est)" value="{{est.id}}">{{est.sigla}}</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Cidades
+                            <select class="form-control custom-select d-block w-100" id="selectCidades" ng-model="cliente.cidades.id" required="required">
+                                <option value="">Selecione</option>
+                                <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Endereço
+                            <input type="text" ng-model="cliente.endereco" class="form-control border-input" placeholder="Endereço" required="required" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for "telefone">E-mail
+                            <input type="email" ng-model="cliente.email" class="form-control border-input" placeholder="Explemplo@mail.com" required="required" />
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for "telefone">Data de Nascimento
+                            <input type="date" ng-model="cliente.datanascimento" class="form-control border-input" required="required" />
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for "telefone">Sexo
+                            <select class="form-control custom-select d-block w-100" ng-model="cliente.sexo" required="required">
+                                <option value="">Selecione</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="text-center">Análise
+                        <input type="radio" name="radioButton" value="Análise" class="form-control" ng-model="cliente.funcao" checked="true" />
+                    </label>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="text-center">Programação
+                        <input type="radio" name="radioButton" value="Programação" class="form-control" ng-model="cliente.funcao" />
+                    </label>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="text-center">Banco de Dados
+                        <input type="radio" name="radioButton" value="Banco de Dados" class="form-control" ng-model="cliente.funcao" />
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="text-center">Ativo
+                            <input type="checkbox" ng-model="cliente.ativo" class="form-control" style="margin-top:10px">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+            <button type="submit" class="btn btn-info btn-fill btn-wd" onclick="this.form.reset()">Limpar</button>
+        </form>
+    </div>
 </div>
 
 </html>

@@ -21,8 +21,8 @@ public class Cidades {
 	private Long id;
 
 	private String nome;
-
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.REFRESH) 
 	private Estados estados;
 
 	public Long getId() {
@@ -39,14 +39,6 @@ public class Cidades {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Estados getEstados() {
-		return estados;
-	}
-
-	public void setEstados(Estados estados) {
-		this.estados = estados;
 	}
 
 	@Override

@@ -18,9 +18,61 @@ public class Cliente {
 	
 	private String nome;
 	
-	private String endereco;
+	private String sobrenome;
 	
 	private String telefone;
+	
+	private String endereco;
+	
+	private String email;	
+	
+	private String datanascimento;
+	
+	private String sexo;
+	
+	private String funcao;
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDatanascimento() {
+		return datanascimento;
+	}
+
+	public void setDatanascimento(String datanascimento) {
+		this.datanascimento = datanascimento;
+	}
+
+	public String getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Cidades getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(Cidades cidades) {
+		this.cidades = cidades;
+	}
+
+	private boolean ativo;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@ForeignKey(name="estados_fk")
@@ -93,5 +145,21 @@ public class Cliente {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 }

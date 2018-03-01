@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public interface DaoInterface<T> {
 	
-	void salvar (T pbjeto) throws Exception;
+	void salvar (T objeto) throws Exception;
 	
 	void deletar (T objeto) throws Exception;
 	

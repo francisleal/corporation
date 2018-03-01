@@ -58,8 +58,8 @@
 				<!--/Menu dropdown-->
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Filtro" aria-label="Search" ng-model="filtro">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<input class="form-control mr-sm-2" type="text" placeholder="Pesquisar" aria-label="Pesquisar" ng-model="filtro">
+				<a class="btn btn-outline-success my-2 my-sm-0" href="#clientelist">Pesquisa</a>
 			</form>
 		</div>
 	</nav>
@@ -72,15 +72,15 @@
 				<p class="float-right d-md-none">
 					<button type="button" class="btn btn-primary btn-sm" data-toggle="offcanvas">Toggle nav</button>
 				</p>
-				<div class="jumbotron">
+				<div class="corporation_jumbotron">
 					<h1>Corporation</h1>
 					<p>Our Business is life itself</p>
 				</div>
-				<!--ng-view-->
-				<div class="content" ng-view>
 				
-				</div>
+				<!--ng-view-->
+				<div class="content corporationScroll" ng-view></div>
 				<!--/ng-view-->
+				
 			</div>
 
 			<!--Menu lateral Direito-->
@@ -110,10 +110,9 @@
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Colocado no final do documento para que as páginas sejam carregadas mais rapidamente -->	
-	<script>window.jQuery || document.write('<script src="resources/js/vendor/jquery-slim.min.js"><\/script>')</script>
-	<script src="resources/js/popper.min.js"></script>
+	<!-- Colocado no final do documento para que as páginas sejam carregadas mais rapidamente -->
 	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/popper.min.js"></script>
 	<script src="resources/js/offcanvas.js"></script>
 </body>
 

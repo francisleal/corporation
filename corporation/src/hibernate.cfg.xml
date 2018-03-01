@@ -12,7 +12,7 @@
 		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property> <!-- Delegada as transações (JDBC) a bases de dados (Padrão) -->
 		<property name="hibernate.jdbc.factory_class">org.hibernate.jdbc.NonBatchingBatcherFactory</property><!-- Selecione um org.hibernate.jdbc.Batcher personalizado -->
 		<property name="hibernate.jdbc.batch_size">100</property> <!-- Lote de SQL -->
-		<property name="hibernate.cache.use_second_level_cache">true</property> <!-- Cache -->
+		<property name="hibernate.cache.use_second_level_cache">false</property> <!-- Cache -->
 		<property name="hibernate.transaction.auto_close_session">true</property> <!-- Fecha sessão automaticamente -->
 		<property name="hibernate.hbm2ddl.auto">update</property> 
 		<property name="hibernate.show_sql">false</property>

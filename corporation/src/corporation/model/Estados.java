@@ -11,9 +11,9 @@ public class Estados {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String nome;
-	
+
 	private String sigla;
 	
 
@@ -65,6 +65,5 @@ public class Estados {
 			return false;
 		return true;
 	}
-	
-	
+
 }
