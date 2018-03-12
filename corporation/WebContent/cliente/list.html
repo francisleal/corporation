@@ -21,25 +21,25 @@
             <th>Sobrenome</th>
             <th>Telefone</th>
             <th>Estado</th>
-            <th>Remover</th>
-            <th>Editar</th>
+            <th>Ações</th>
         </thead>
         <tbody>
             <tr ng-repeat="cliente in data | filter:filtro">
                 <td>{{cliente.id}}</td>
-                <td><a href ng-click="visualizarCliente(cliente.id)" title="Visualizar Clientes">{{cliente.nome}}</a></td>
+                <td>{{cliente.nome}}</td>
                 <td>{{cliente.sobrenome}}</td>
                 <td>{{cliente.telefone}}</td>
                 <td>{{cliente.estados.nome}}</td>
-                <td>
-                    <a href ng-click="removerCliente(cliente.id);">Apagar
-						<i class="fa fa-times" aria-hidden="true" style="color: red;"></i>
-					</a>
-                </td>
-                <td>
-                    <a href ng-click="editarCliente(cliente.id);">Editar
-						<i class="fa fa-pencil-square-o" aria-hidden="true" style="color: #e7971b;"></i>
-					</a>
+                <td>                
+                    <a href href ng-click="visualizarCliente(cliente.id)">
+                        <i class="fa fa-search"></i>
+					</a>&nbsp
+                    <a href ng-click="editarCliente(cliente.id);">
+                        <i class="fa fa-pencil-square-o" style="color: #e7971b;"></i>
+					</a>&nbsp
+                    <a href ng-click="removerCliente(cliente.id);">
+						<i class="fa fa-times" style="color: red;"></i>
+					</a>                    
                 </td>
             </tr>
         </tbody>

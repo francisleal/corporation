@@ -19,7 +19,12 @@ img.corporation {
 }
 
 table.corporation {
-	white-space: nowrap;
+	white-space: nowrap;    
+}
+
+table.corporation th:last-child,
+table.corporation td:last-child {
+    text-align: center;
 }
 
 table.corporationVisualizar td {

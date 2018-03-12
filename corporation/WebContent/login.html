@@ -1,156 +1,49 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8"> 
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="francis.leal">
+
+    <title>Login Mais Vida</title>
+
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="resources/css/corporationLogin.css" rel="stylesheet">
+    
 </head>
 
-<div class="row row-offcanvas row-offcanvas-right">
-	<div class="col-12 col-md-9">
-		<h1>Cadastro de clientes</h1>
-		<a href="#clientelist">Lista de clientes <i class="fa fa-user " aria-hidden="true" style="color: #007bff;"></i></a> 
-		<br /> 
-	</div>
-	
-	<div class="col-12 col-md-9" ng-init="carregarEstados();">
-		<div class="">
-			<div class="content">
-				<form id="formCliente" ng-submit="salvarCliente();">
-					<div class="row">
+<body>
 
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<img class="corporation" alt="Foto" id="imagemCliente" src="" >  -->
-<!--                                 <input type="file" id="file" onchange="javascript:visualizarImg();"> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
+<div class="container-fluid">
+    
+     <form class="corporationLogin" id="formulario" method="post" name="formulario" action="/corporation/j_spring_security_check">
 
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Id</label> <input type="text" ng-model="cliente.id"
-									class="form-control border-input" disabled />
-							</div>
-						</div>
-					</div>
+         <h1 class="h3 mb-3 font-weight-normal">Corporation</h1>
+        
+         <div class="input-group mb-2 mr-sm-2">
+             <div class="input-group-prepend">
+                 <div class="input-group-text">@</div>
+             </div>
+             <input type="email" class="form-control" name="j_username" id="j_username" placeholder="Login" required="required">
+         </div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Nome</label> <input type="text" ng-model="cliente.nome"
-									class="form-control border-input" placeholder="Nome"
-									required="required">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="endereco">Endereço 
-									<input type="text" required="required" class="form-control border-input" ng-model="cliente.endereco" placeholder="Endereço">
-								</label>	
-							</div>
-						</div>
-					</div>
+         <div class="input-group mb-2 mr-sm-2">
+             <div class="input-group-prepend">
+                 <div class="input-group-text">&nbsp*&nbsp</div>
+             </div>
+             <input type="password" class="form-control" name="j_password" id="j_password" placeholder="Senha" required="required">
+         </div>
 
-					<div class="row">
-						<div class="col-md-5">
-							<div class="form-group">
-								<label>Telefone</label> <input type="text" id="telefone"
-									ng-model="cliente.telefone" class="form-control border-input"
-									placeholder="Telefone" required="required">
-
-							</div>
-						</div>
-
-
-<!-- 						<div class="col-md-5"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Sexo</label> <select ng-model="cliente.sexo" -->
-<!-- 									class="form-control"> -->
-<!-- 									<option value="Masculino">Masculino</option> -->
-<!-- 									<option value="Feminino">Feminino</option> -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-
-<!-- 						<div class="col-md-1"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Ativo <input type="checkbox" class="form-control corporation" -->
-<!-- 									ng-model="cliente.ativo"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-					</div>
-
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Banco de Dados  -->
-<!-- 									<input type="radio" class="form-control" name="interesse" -->
-<!-- 									ng-model="cliente.interesse" value="banco"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Programação <input type="radio" class="form-control" name="interesse" -->
-<!-- 									ng-model="cliente.interesse" value="programacao" -->
-<!-- 									ng-checked="true"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Análise <input type="radio" class="form-control" name="interesse" ng-model="cliente.interesse" value="analise"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-3"> -->
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Cpf <input type="text" class="form-control" id="cpf" name="cpf" ng-model="cliente.cpf"> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-
-					<div class="row">
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Estado
-									<select class="form-control" id="selectEstados" ng-model="cliente.estados.id">
-										<option value="">Selecione</option>
-										<option ng-repeat="est in dataEstados" ng-click="carregarCidades(est)" value="{{est.id}}">{{est.sigla}}</option>
-									</select>
-								</label>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Cidades
-									<select class="form-control" id="selectCidades" ng-model="cliente.cidades.id">
-										<option value="">Selecione</option>
-										<option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
-									</select>
-								</label>
-							</div>
-						</div>
-					</div>
-
-					<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
-					<button type="submit" class="btn btn-info btn-fill btn-wd" ng-click="$scope.cliente={}">Limpar</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
+         <label>
+             <input type="checkbox" value="remember-me"> Remember me
+         </label>
+         <button class="btn btn-lg btn-success btn-block" type="submit">Log in</button>
+     </form>
 </div>
+
+</body>
 
 </html>
