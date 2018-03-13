@@ -43,6 +43,11 @@ public class Cliente {
 	public String getDatanascimento() {
 		return datanascimento;
 	}
+	
+//	public String getDatanascimento() {
+//		LocalDate t = LocalDate.parse(datanascimento, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+//		return "" + t.getDayOfMonth() + "/" + t.getMonthValue() + "/" + t.getYear();
+//	}
 
 	public void setDatanascimento(String datanascimento) {
 		this.datanascimento = datanascimento;

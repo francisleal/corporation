@@ -38,8 +38,9 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 	
  	if($routeParams.id != null && $routeParams.id != undefined && $routeParams.id != '') {
 		$http.get("cliente/buscarcliente/" + $routeParams.id).success(function(response){
-			$scope.cliente = response;			
-			//------------------ carrega estados e cidades do cliente em edi��o
+			$scope.cliente = response;		
+			
+			//------------------ carrega estados e cidades do cliente em edição
 			setTimeout(function () {
 				$("#selectEstados").prop('selectedIndex', (new Number($scope.cliente.estados.id) + 1));
 				
@@ -52,7 +53,23 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 					erro("Error: " + status);
 				});			
 			}, 1000);
-			//----------------------			
+			//------------------------------------------------------------------------------	
+			
+			{ // formata input type date
+				var dateFormat = new Date($scope.cliente.datanascimento);
+				
+				$scope.datanascimento = dateFormat.toLocaleDateString();
+				
+				$scope.cliente.datanascimento = dateFormat;
+			}
+			
+			
+			if($scope.cliente.ativo == true) {
+				$scope.ativo = 'Ativo';
+			} else {
+				$scope.ativo = 'Inativo';
+			};
+			
 		}).error(function(data, status, headers, config){
 			erro("Error buscarcliente : " + status);
 		});
@@ -73,7 +90,7 @@ app.controller('clienteController', function($scope, $http, $location, $routePar
 	//salvar cliente
 	$scope.salvarCliente = function() {		
 		$http.post("cliente/salvar", $scope.cliente).success(function(){
-			$scope.cliente = {};
+			$scope.cliente = {};			
 			$location.path('clientelist/');
 			sucesso("Salvo com sucesso");
 		}).error(function(data, status, headers, config){
